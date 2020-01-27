@@ -1,4 +1,4 @@
-{%- extends 'base.html.j2' -%}
+{%- extends 'classic/base.html.j2' -%}
 {% from 'mathjax.html.j2' import mathjax %}
 
 
@@ -60,7 +60,7 @@
 
 
 {% block notebook_css %}
-{{ resources.include_css("static/style.css") }}
+{{ resources.include_css("static/classic/style.css") }}
 <style type="text/css">
 /* Overrides of notebook CSS for static HTML export */
 body {

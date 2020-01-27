@@ -1,42 +1,91 @@
+import json
+import os
+
+import jinja2
 from flask import Flask, render_template
+
+import nbconvert.filters as filters
 
 app = Flask(__name__, template_folder="templates")
 
 
-@app.route('/')
-def hello_world():
-    return render_template('/lab/index.html.j2', nb={})
+# https://nbconvert.readthedocs.io/en/latest/api/filters.html#filters
+@app.template_filter()
+def highlight_code(lst, metadata):
+    # text = ''.join(lst)
+    return lst
 
 
 @app.template_filter()
-def highlight_code(text):
-    return None
+def strip_files_prefix(lst):
+    text = ''.join(lst)
+    return filters.strip_files_prefix(text)
+
 
 @app.template_filter()
-def strip_files_prefix(text):
-    return None
+def markdown2html(lst):
+    text = ''.join(lst)
+    return filters.markdown2html(text)
+
 
 @app.template_filter()
-def markdown2html(text):
-    return None
+def ansi2html(lst):
+    text = ''.join(lst)
+    return filters.ansi2html(text)
 
-@app.template_filter()
-def ansi2html(text):
-    return None
 
 @app.template_filter()
 def posix_path(text):
-    return None
+    return filters.posix_path(text)
+
 
 @app.template_filter()
-def get_metadata(text):
-    return None
+def get_metadata(output, key, mimetype=None):
+    return filters.get_metadata(output, key, mimetype)
+
 
 @app.template_filter()
 def filter_data_type(text):
-    return None
+    return text
+
 
 @app.template_filter()
 def json_dumps(text):
-    return None
+    return text
+
+
+@app.route('/')
+def hello_world():
+    nb = None
+    try:
+        nb = json.loads(open(f"{os.path.dirname(__file__)}/sample.ipynb").read())
+    except Exception as e:
+        exit(1)
+
+    # https://github.com/jupyter/nbconvert/blob/master/nbconvert/exporters/html.py#L109
+    def resources_include_css(name):
+        # <link rel="stylesheet" type="text/css" href="mystyle.css">
+        code = """<link rel="stylesheet" type="text/css" href="%s">""" % name
+        return jinja2.Markup(code)
+
+    resources = {'metadata': {'name': 'name'},
+                 'inlining': {'css': []},
+                 # 'include_css': 'include_css'
+                 }
+
+    resources['global_content_filter'] = {
+        'include_code': True,
+        'include_markdown': True,
+        'include_raw': True,
+        'include_unknown': True,
+        'include_input': True,
+        'include_output': True,
+        'include_input_prompt': True,
+        'include_output_prompt': True,
+        'no_prompt': False,
+    }
+
+    resources['include_css'] = resources_include_css
+
+    return render_template('/lab/index.html.j2', nb=nb, resources=resources)
 
