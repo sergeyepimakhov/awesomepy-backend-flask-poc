@@ -6,8 +6,11 @@ from flask import Flask, render_template
 
 import nbconvert.filters as filters
 
+import uuid
+
 app = Flask(__name__, template_folder="templates")
 
+# filters
 
 # https://nbconvert.readthedocs.io/en/latest/api/filters.html#filters
 @app.template_filter()
@@ -46,12 +49,18 @@ def get_metadata(output, key, mimetype=None):
 
 @app.template_filter()
 def filter_data_type(text):
-    return text
+    data_type_filter = filters.DataTypeFilter()
+    return data_type_filter(text)
 
 
 @app.template_filter()
 def json_dumps(text):
-    return text
+    return json.dumps(text)
+
+# functions
+@app.context_processor
+def set_uuid4():
+    return dict(uuid4=uuid.uuid4)
 
 
 @app.route('/')
@@ -68,8 +77,10 @@ def hello_world():
         code = """<link rel="stylesheet" type="text/css" href="%s">""" % name
         return jinja2.Markup(code)
 
-    resources = {'metadata': {'name': 'name'},
-                 'inlining': {'css': []},
+    # TODO include_js
+
+    resources = {'metadata': {'name': 'name'}, # ???
+                 'inlining': {'css': []}, # additional css files
                  # 'include_css': 'include_css'
                  }
 

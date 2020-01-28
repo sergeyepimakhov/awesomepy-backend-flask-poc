@@ -221,8 +221,7 @@ class="unconfined"
  ###############################################################################
  #}
 
-{# TODO: {% set div_id = uuid4() %} #}
-{% set div_id = '123456' %}
+{% set div_id = uuid4() %}
 {%- block data_javascript scoped %}
 <div id="{{ div_id }}" class="jp-RenderedJavaScript jp-OutputArea-output {{ extra_class }}" data-mime-type="application/javascript">
 <script type="text/javascript">
@@ -233,8 +232,7 @@ var element = document.getElementById('{{ div_id }}');
 {%- endblock -%}
 
 {%- block data_widget_state scoped %}
-{# TODO: {% set div_id = uuid4() %} #}
-{% set div_id = '123456' %}
+{% set div_id = uuid4() %}
 {% set datatype_list = output.data | filter_data_type %}
 {% set datatype = datatype_list[0]%}
 <div id="{{ div_id }}" class="output_subarea output_widget_state {{ extra_class }}">
@@ -248,8 +246,7 @@ var element = document.getElementById('{{ div_id }}');
 {%- endblock data_widget_state -%}
 
 {%- block data_widget_view scoped %}
-{# TODO: {% set div_id = uuid4() %} #}
-{% set div_id = '123456' %}
+{% set div_id = uuid4() %}
 {% set datatype_list = output.data | filter_data_type %}
 {% set datatype = datatype_list[0]%}
 <div id="{{ div_id }}" class="jupyter-widgets jp-OutputArea-output {{ extra_class }}">
