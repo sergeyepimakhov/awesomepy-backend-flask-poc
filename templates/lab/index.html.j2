@@ -60,11 +60,11 @@
 
 
 {% block notebook_css %}
-{{ resources.include_css("static/lab/index.css") }}
+{{ resources.include_css("static/css/lab/index.css") }}
 {% if resources.theme == 'dark' %}
-    {{ resources.include_css("static/lab/theme-dark.css") }}
+    {{ resources.include_css("static/css/lab/theme-dark.css") }}
 {% else %}
-    {{ resources.include_css("static/lab/theme-light.css") }}
+    {{ resources.include_css("static/css/lab/theme-light.css") }}
 {% endif %}
 <style type="text/css">
 a.anchor-link {
@@ -80,7 +80,7 @@ a.anchor-link {
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 {% block custom_css %}
-<link rel="stylesheet" href="custom.css">
+<link rel="stylesheet" type="text/css" href="static/css/lab/custom.css">
 {% endblock custom_css %}
 
 <!-- Loading mathjax macro -->

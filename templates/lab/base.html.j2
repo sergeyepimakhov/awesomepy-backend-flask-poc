@@ -2,6 +2,8 @@
 {% from 'celltags.j2' import celltags %}
 
 {% block codecell %}
+{# render only if cell is not empty #}
+{% if cell.source | length > 0 %}
 {%- if not cell.outputs -%}
 {%- set no_output_class="jp-mod-noOutputs" -%}
 {%- endif -%}
@@ -11,6 +13,7 @@
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell {{ no_output_class }} {{ no_input_class }}">
 {{ super() }}
 </div>
+{% endif %}
 {%- endblock codecell %}
 
 {% block input_group -%}
@@ -22,10 +25,13 @@
 {% endblock input_group %}
 
 {% block input %}
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline" data-executable="true" data-language="{{ cell.source|language }}">
+{#
      <div class="CodeMirror cm-s-jupyter">
 {{ cell.source | highlight_code(metadata=cell.metadata) }}
      </div>
+#}
+    <pre>{{ cell.source | join('') }}</pre>
 </div>
 {%- endblock input %}
 
@@ -85,6 +91,8 @@
 {% endblock output %}
 
 {% block markdowncell scoped %}
+{# render only if cell is not empty #}
+{% if cell.source | length > 0 %}
 <div class="jp-Cell-inputWrapper">
 {%- if resources.global_content_filter.include_input_prompt-%}
     {{ self.empty_in_prompt() }}
@@ -93,6 +101,7 @@
 {{ cell.source  | markdown2html | strip_files_prefix }}
 </div>
 </div>
+{% endif %}
 {%- endblock markdowncell %}
 
 {% block unknowncell scoped %}

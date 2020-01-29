@@ -60,7 +60,7 @@
 
 
 {% block notebook_css %}
-{{ resources.include_css("static/classic/style.css") }}
+{{ resources.include_css("static/css/classic/style.css") }}
 <style type="text/css">
 /* Overrides of notebook CSS for static HTML export */
 body {
@@ -99,7 +99,7 @@ div#notebook-container{
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 {% block custom_css %}
-<link rel="stylesheet" href="custom.css">
+<link rel="stylesheet" type="text/css" href="static/css/classic/custom.css">
 {% endblock custom_css %}
 
 <!-- Loading mathjax macro -->

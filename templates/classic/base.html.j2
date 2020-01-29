@@ -2,9 +2,12 @@
 {% from 'celltags.j2' import celltags %}
 
 {% block codecell %}
+{# render only if cell is not empty #}
+{% if cell.source | length > 0 %}
 <div class="cell border-box-sizing code_cell rendered{{ celltags(cell) }}">
 {{ super() }}
 </div>
+{% endif %}
 {%- endblock codecell %}
 
 {% block input_group -%}
@@ -44,9 +47,16 @@
 {% endblock output_prompt %}
 
 {% block input %}
+{% if cell.source | length > 0 %}
+{% endif %}
 <div class="inner_cell">
     <div class="input_area">
+{#
 {{ cell.source | highlight_code(metadata=cell.metadata) }}
+#}
+        <div class="highlight hl-ipython3" data-executable="true" data-language="{{ cell.source|language }}">
+            <pre>{{ cell.source | join('') }}</pre>
+        </div>
     </div>
 </div>
 {%- endblock input %}
@@ -75,6 +85,8 @@
 {% endblock output %}
 
 {% block markdowncell scoped %}
+{# render only if cell is not empty #}
+{% if cell.source | length > 0 %}
 <div class="cell border-box-sizing text_cell rendered{{ celltags(cell) }}">
 {%- if resources.global_content_filter.include_input_prompt-%}
     {{ self.empty_in_prompt() }}
@@ -85,6 +97,7 @@
 </div>
 </div>
 </div>
+{% endif %}
 {%- endblock markdowncell %}
 
 {% block unknowncell scoped %}

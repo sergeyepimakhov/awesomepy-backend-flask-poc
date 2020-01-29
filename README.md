@@ -3,5 +3,4 @@
 ## TODOs
 
     - integrate ThebeBook
-    - custom CodeMirror theme
-    -
+    - custom CodeMirror theme (In and Out)
