@@ -1,0 +1,57 @@
+.jp-OutputPrompt,
+.jp-InputPrompt{
+    display: None;
+}
+
+/* buttons */
+.jp-InputArea {
+  position: relative;
+}
+
+.thebelab-button-group {
+  position: absolute;
+  right: 0px;
+  z-index: 3;
+}
+
+button.thebelab-restart-button {
+  display: none;
+}
+/* buttons end */
+
+/* markdown */
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
+}
+h1 {
+    font-family: Helvetica, serif;
+}
+div.jp-MarkdownOutput {
+    font-family: Computer Modern, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    line-height: 145%;
+    font-size: 105%;
+}
+
+div.jp-MarkdownOutput li {
+    line-height: 145%;
+}
+
+div.jp-MarkdownOutput code {
+    color: rgb(40, 114, 43);
+    font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
+    font-size: 90%;
+}
+/* end markdown */
+
+/*
+.CodeMirror{
+    font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
+    font-size: 90%;
+}
+
+.jp-OutputArea-output{
+    font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
+    font-size: 90%;
+}
+*/

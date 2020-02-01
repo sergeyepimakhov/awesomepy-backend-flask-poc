@@ -92,6 +92,12 @@ def resources_include_css(name):
     code = """<link rel="stylesheet" type="text/css" href="%s">""" % name
     return jinja2.Markup(code)
 
+
+def resources_include_js(name):
+    # <link rel="stylesheet" type="text/css" href="mystyle.css">
+    code = """<script type="module" src="%s"></script>""" % name
+    return jinja2.Markup(code)
+
 # TODO include_js
 
 resources = {'metadata': {'name': 'Sample'},
@@ -106,12 +112,13 @@ resources['global_content_filter'] = {
     'include_unknown': True,
     'include_input': True,
     'include_output': True,
-    'include_input_prompt': False, # exclude In[]
-    'include_output_prompt': False, # exclude Out[]
-    'no_prompt': False,
+    'include_input_prompt': True, # exclude In[]
+    'include_output_prompt': True, # exclude Out[]
+    'no_prompt': True,
 }
 
 resources['include_css'] = resources_include_css
+resources['include_js'] = resources_include_js
 
 
 @app.route('/classic')

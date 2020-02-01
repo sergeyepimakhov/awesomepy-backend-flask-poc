@@ -49,6 +49,33 @@
 {%- endif -%}
 {% endblock ipywidgets %}
 
+<!-- CodeMirror theme -->
+<!-- <link rel="stylesheet" href="http://codemirror.net/theme/blackboard.css"> -->
+<!-- <link rel="stylesheet" href="http://codemirror.net/theme/solarized.css"> -->
+<link rel="stylesheet" href="http://codemirror.net/theme/eclipse.css">
+
+<!-- configure and load thebe -->
+<script type="text/x-thebe-config">
+    {
+      bootstrap: true,
+      requestKernel: true,
+      binderOptions: {
+        repo: "sergeyepimakhov/hello-jupyter",
+      },
+      kernelOptions: {
+        name: "python3",
+      },
+      codeMirrorconfig: {
+        lineNumbers: true,
+        // theme: "ipython",
+        // theme: "blackboard",
+        // theme: "solarized light"
+        theme: "eclipse",
+      },
+    }
+</script>
+<script type="text/javascript" src="static/js/thebe/lib/index.js"></script>
+
 {% block extra_css %}
 {% endblock extra_css %}
 
@@ -101,6 +128,10 @@ div#notebook-container{
 {% block custom_css %}
 <link rel="stylesheet" type="text/css" href="static/css/classic/custom.css">
 {% endblock custom_css %}
+
+{% block notebook_js %}
+{{ resources.include_js("static/js/classic/index.js") }}
+{% endblock notebook_js %}
 
 <!-- Loading mathjax macro -->
 {{ mathjax() }}

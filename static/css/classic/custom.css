@@ -1,3 +1,8 @@
+.prompt{
+    display: None;
+}
+
+/* markdown */
 @font-face {
     font-family: "Computer Modern";
     src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
@@ -37,9 +42,6 @@ div.text_cell_render code {
     font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
 }
 
-/* .prompt{
-    display: None;
-} */
 .text_cell_render h5 {
     font-weight: 300;
     font-size: 16pt;
@@ -50,6 +52,8 @@ div.text_cell_render code {
     display: block;
 }
 
+/*
 .warning{
     color: rgb( 240, 20, 20 )
 }
+*/
