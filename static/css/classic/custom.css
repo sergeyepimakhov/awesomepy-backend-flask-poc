@@ -2,6 +2,26 @@
     display: None;
 }
 
+/* buttons */
+/* buttons to the right */
+.input_area {
+  position: relative;
+}
+
+.thebelab-button-group {
+  position: absolute;
+  right: 0px;
+  z-index: 3;
+}
+
+button.thebelab-restart-button {
+  display: none;
+}
+button.thebelab-run-button:after {
+  color: #2A00FF; /* blue from eclipse*/
+}
+/* buttons end */
+
 /* markdown */
 @font-face {
     font-family: "Computer Modern";

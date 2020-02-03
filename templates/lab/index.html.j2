@@ -84,6 +84,9 @@
 <script type="text/javascript" src="static/js/thebe/lib/index.js"></script>
 
 {% block extra_css %}
+{%- block html_head_css_fontawesome -%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+{%- endblock html_head_css_fontawesome -%}
 {% endblock extra_css %}
 
 {% for css in resources.inlining.css -%}
